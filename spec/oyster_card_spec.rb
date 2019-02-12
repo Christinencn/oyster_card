@@ -11,7 +11,14 @@ describe Oystercard do
   end
 
 it "raises error if amount is beyond limit" do
-  expect { subject.top_up(91) }.to raise_error "maxium top up is #{subject.limit}" #limit is accessing attr_reader
+  expect { subject.top_up(91) }.to raise_error "maxium top up is #{subject.limit}" #uses {} syntax as it is raising an error, limit is accessing attr_reader
+end
+
+it "reduces balance when used" do
+  subject.top_up(5) # need to top up first inorder to increase the balance
+  subject.deduct(2)
+  expect(subject.balance).to eq 3
+
 end
 
 end
